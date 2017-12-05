@@ -1,0 +1,42 @@
+Adding namespace to all class after converting website to webapplication
+
+match all: (.|\n)*
+
+find what: (public partial class [\w]+ : System.Web.UI.Page(.*|(\r?\n))*})
+replace: namespace WIMS.WebApp \r\n { \r\n $1 \r\n}
+
+
+find all xml comments : \/\/\/(.*|(\r?\n))
+
+ServiceAuthorize
+find what: \[RoutePrefix\("Services/(.*)"\), (.*)\r\n(.*), ServiceAuthorize\(".*"\)\]
+replace: [RoutePrefix("Services/$1"), $2\r\n$3, ServiceAuthorize("$1")]
+
+PageAuthorize
+find what: \[RoutePrefix\("(.*)"\), ((\r\n|.)*)PageAuthorize\(".*"\)\]
+replace: [RoutePrefix("$1"), $2PageAuthorize("$1")]
+
+sql to oracle row.cs
+base\("\[dbo\].\[(.*)\]"\) 
+base("$1") 
+
+Add [CssClass] to all rows items
+\[DisplayName(.*)\]
+[DisplayName$1, CssClass("width6")]
+
+
+view path
+find what: return View\("~/Modules/(.*)/(.*)/(.*).cshtml"\);
+replace with: return View(MVC.Views.$1.$2.$3);
+
+fixing lookup script
+find what: \[LookupScript\("(.*)Row"\)\]
+replace with: [LookupScript("$1")]
+
+put a table name constant:
+#region RowFields((.|\n)*): base\("(.*)"\)((.|\n)*)#endregion
+#region RowFields \r\n\t\t public const string TableName = "$3";\r\n $1: base("$3")$4#endregion
+
+put TableName attr on top of Rows
+\[ConnectionKey(.*), DisplayName
+[ConnectionKey$1, TableName(TableName), DisplayName
