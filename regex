@@ -40,3 +40,7 @@ put a table name constant:
 put TableName attr on top of Rows
 \[ConnectionKey(.*), DisplayName
 [ConnectionKey$1, TableName(TableName), DisplayName
+
+To replace someObj.toString() -> String(someObj)
+Find: \s([\w|\.]*)\.toString\(\)
+Repace: String($1)
