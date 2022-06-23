@@ -82,7 +82,7 @@ Set @maxi = @@rowcount
 set @i = 1
 
 print '<table border="0" cellspacing="0" cellpadding="0" width="550px" align="center"><tr><td colspan="3" style="height:50;font-size:14pt;text-align:center;"><a name="index"></a><b>Index</b></td></tr></table>'
-print '<table border="0" cellspacing="1" cellpadding="0" width="550px" align="center"><tr><th>Sr</th><th>Object</th><th>Type</th></tr>' 
+print '<table border="0" cellspacing="1" cellpadding="0" width="550px" align="center"><tr><th>#</th><th>Object</th><th>Type</th></tr>' 
 While(@i <= @maxi)
 begin
 	select @Output =  '<tr><td align="center">' + Cast((@i) as varchar) + '</td><td><a href="#' + Type + ':' + name + '">' + name + '</a></td><td>' + Type + '</td></tr>' 
