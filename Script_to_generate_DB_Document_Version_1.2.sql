@@ -29,27 +29,25 @@ Print '<title>::' + DB_name() + '::</title>'
 Print '<style>'
     
 Print '		body {'
-Print '		font-family:verdana;'
-Print '		font-size:9pt;'
+Print '			font-family:verdana;'
+Print '			font-size:12pt;'
 Print '		}'
 		
 Print '		td {'
-Print '		font-family:verdana;'
-Print '		font-size:9pt;'
+Print '			padding: 5;'
 Print '		}'
 		
 Print '		th {'
-Print '		font-family:verdana;'
-Print '		font-size:9pt;'
-Print '		background:#d3d3d3;'
+Print '			background:#d3d3d3;'
+Print '			padding: 5;'
 Print '		}'
 Print '		table'
 Print '		{'
-Print '		background:#d3d3d3;'
+Print '			background:#000;'
 Print '		}'
 Print '		tr'
 Print '		{'
-Print '		background:#ffffff;'
+Print '			background:#ffffff;'
 Print '		}'
 Print '	</style>'
 Print '</head>'
@@ -155,7 +153,7 @@ begin
 	set @j = 1
 
 	print '<table border="0" cellspacing="0" cellpadding="0" width="100%"><tr><td><b>Table Columns</b></td></tr></table>' 
-	print '<table border="0" cellspacing="1" cellpadding="0" width="100%"><tr><th>Sr.</th><th>Name</th><th>Datatype</th><th>Nullable</th><th>Description</th></tr>' 
+	print '<table border="0" cellspacing="1" cellpadding="0" width="100%"><tr><th>#</th><th>Name</th><th>Datatype</th><th>Nullable</th><th>Description</th></tr>' 
 	
 	While(@j <= @maxj)
 	begin
@@ -201,7 +199,7 @@ begin
 	begin
 
 		print '<table border="0" cellspacing="0" cellpadding="0" width="100%"><tr><td><b>Refrence Keys</b></td></tr></table>' 
-		print '<table border="0" cellspacing="1" cellpadding="0" width="100%"><tr><th>Sr.</th><th>Name</th><th>Column</th><th>Reference To</th></tr>' 
+		print '<table border="0" cellspacing="1" cellpadding="0" width="100%"><tr><th>#</th><th>Name</th><th>Column</th><th>Reference To</th></tr>' 
 
 		While(@j <= @maxj)
 		begin
@@ -251,7 +249,7 @@ begin
 	begin
 
 		print '<table border="0" cellspacing="0" cellpadding="0" width="100%"><tr><td><b>Default Constraints</b></td></tr></table>' 
-		print '<table border="0" cellspacing="1" cellpadding="0" width="100%"><tr><th>Sr.</th><th>Name</th><th>Column</th><th>Value</th></tr>' 
+		print '<table border="0" cellspacing="1" cellpadding="0" width="100%"><tr><th>#</th><th>Name</th><th>Column</th><th>Value</th></tr>' 
 
 		While(@j <= @maxj)
 		begin
@@ -311,7 +309,7 @@ begin
 	begin
 
 		print '<table border="0" cellspacing="0" cellpadding="0" width="100%"><tr><td><b>Check  Constraints</b></td></tr></table>' 
-		print '<table border="0" cellspacing="1" cellpadding="0" width="100%"><tr><th>Sr.</th><th>Name</th><th>Column</th><th>Definition</th></tr>' 
+		print '<table border="0" cellspacing="1" cellpadding="0" width="100%"><tr><th>#</th><th>Name</th><th>Column</th><th>Definition</th></tr>' 
 
 		While(@j <= @maxj)
 		begin
@@ -353,7 +351,7 @@ begin
 	begin
 
 		print '<table border="0" cellspacing="0" cellpadding="0" width="100%"><tr><td><b>Triggers</b></td></tr></table>' 
-		print '<table border="0" cellspacing="1" cellpadding="0" width="100%"><tr><th>Sr.</th><th>Name</th><th>Description</th></tr>' 
+		print '<table border="0" cellspacing="1" cellpadding="0" width="100%"><tr><th>#</th><th>Name</th><th>Description</th></tr>' 
 
 		While(@j <= @maxj)
 		begin
@@ -398,7 +396,7 @@ begin
 	begin
 
 		print '<table border="0" cellspacing="0" cellpadding="0" width="100%"><tr><td><b>Indexes</b></td></tr></table>' 
-		print '<table border="0" cellspacing="1" cellpadding="0" width="100%"><tr><th>Sr.</th><th>Name</th><th>Type</th><th>Columns</th></tr>' 
+		print '<table border="0" cellspacing="1" cellpadding="0" width="100%"><tr><th>#</th><th>Name</th><th>Type</th><th>Columns</th></tr>' 
 		set @Output = ''
 		set @last = ''
 		set @current = ''
@@ -442,6 +440,3 @@ drop table #FK
 drop table #Constraint
 drop table #Indexes 
 set nocount off
-
-
-
