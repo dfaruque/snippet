@@ -29,21 +29,16 @@ Print '<title>::' + DB_name() + '::</title>'
 Print '<style>'
     
 Print '		body {'
-Print '			font-family:verdana;'
-Print '			font-size:12pt;'
+Print '			font-family:Tahoma;'
+Print '			font-size:10pt;'
 Print '		}'
-		
-Print '		td {'
-Print '			padding: 5;'
-Print '		}'
-		
 Print '		th {'
 Print '			background:#d3d3d3;'
-Print '			padding: 5;'
 Print '		}'
 Print '		table'
 Print '		{'
 Print '			background:#000;'
+Print '			font-size:10pt;'
 Print '		}'
 Print '		tr'
 Print '		{'
@@ -81,8 +76,8 @@ set nocount on
 Set @maxi = @@rowcount
 set @i = 1
 
-print '<table border="0" cellspacing="0" cellpadding="0" width="550px" align="center"><tr><td colspan="3" style="height:50;font-size:14pt;text-align:center;"><a name="index"></a><b>Index</b></td></tr></table>'
-print '<table border="0" cellspacing="1" cellpadding="0" width="550px" align="center"><tr><th>#</th><th>Object</th><th>Type</th></tr>' 
+print '<table border="0" cellspacing="0" cellpadding="5" width="550px" align="center"><tr><td colspan="3" style="height:50;font-size:14pt;text-align:center;"><a name="index"></a><b>Index</b></td></tr></table>'
+print '<table border="0" cellspacing="1" cellpadding="5" width="550px" align="center"><tr><th>#</th><th>Object</th><th>Type</th></tr>' 
 While(@i <= @maxi)
 begin
 	select @Output =  '<tr><td align="center">' + Cast((@i) as varchar) + '</td><td><a href="#' + Type + ':' + name + '">' + name + '</a></td><td>' + Type + '</td></tr>' 
@@ -100,10 +95,10 @@ begin
 	select @Output =  '<tr><th align="left"><a name="' + Type + ':' + name + '"></a><b>' + Type + ':' + name + '</b></th></tr>',  @description = [description]
 			from #Tables where id = @i
 	
-	print '<br /><br /><br /><table border="0" cellspacing="0" cellpadding="0" width="100%"><tr><td align="right"><a href="#index">Index</a></td></tr>'
+	print '<br /><br /><br /><table border="0" cellspacing="0" cellpadding="5" width="100%"><tr><td align="right"><a href="#index">Index</a></td></tr>'
 	print @Output
 	print '</table><br />'
-	print '<table border="0" cellspacing="0" cellpadding="0" width="100%"><tr><td><b>Description</b></td></tr><tr><td>' + isnull(@description, '') + '</td></tr></table><br />' 
+	print '<table border="0" cellspacing="0" cellpadding="5" width="100%"><tr><td><b>Description</b></td></tr><tr><td>' + isnull(@description, '') + '</td></tr></table><br />' 
 
 	--table columns
 	truncate table #Columns 
@@ -152,8 +147,8 @@ begin
 	Set @maxj =   @@rowcount
 	set @j = 1
 
-	print '<table border="0" cellspacing="0" cellpadding="0" width="100%"><tr><td><b>Table Columns</b></td></tr></table>' 
-	print '<table border="0" cellspacing="1" cellpadding="0" width="100%"><tr><th>#</th><th>Name</th><th>Datatype</th><th>Nullable</th><th>Description</th></tr>' 
+	print '<table border="0" cellspacing="0" cellpadding="5" width="100%"><tr><td><b>Table Columns</b></td></tr></table>' 
+	print '<table border="0" cellspacing="1" cellpadding="5" width="100%"><tr><th>#</th><th>Name</th><th>Datatype</th><th>Nullable</th><th>Description</th></tr>' 
 	
 	While(@j <= @maxj)
 	begin
@@ -198,8 +193,8 @@ begin
 	if (@maxj >0)
 	begin
 
-		print '<table border="0" cellspacing="0" cellpadding="0" width="100%"><tr><td><b>Refrence Keys</b></td></tr></table>' 
-		print '<table border="0" cellspacing="1" cellpadding="0" width="100%"><tr><th>#</th><th>Name</th><th>Column</th><th>Reference To</th></tr>' 
+		print '<table border="0" cellspacing="0" cellpadding="5" width="100%"><tr><td><b>Refrence Keys</b></td></tr></table>' 
+		print '<table border="0" cellspacing="1" cellpadding="5" width="100%"><tr><th>#</th><th>Name</th><th>Column</th><th>Reference To</th></tr>' 
 
 		While(@j <= @maxj)
 		begin
@@ -248,8 +243,8 @@ begin
 	if (@maxj >0)
 	begin
 
-		print '<table border="0" cellspacing="0" cellpadding="0" width="100%"><tr><td><b>Default Constraints</b></td></tr></table>' 
-		print '<table border="0" cellspacing="1" cellpadding="0" width="100%"><tr><th>#</th><th>Name</th><th>Column</th><th>Value</th></tr>' 
+		print '<table border="0" cellspacing="0" cellpadding="5" width="100%"><tr><td><b>Default Constraints</b></td></tr></table>' 
+		print '<table border="0" cellspacing="1" cellpadding="5" width="100%"><tr><th>#</th><th>Name</th><th>Column</th><th>Value</th></tr>' 
 
 		While(@j <= @maxj)
 		begin
@@ -308,8 +303,8 @@ begin
 	if (@maxj >0)
 	begin
 
-		print '<table border="0" cellspacing="0" cellpadding="0" width="100%"><tr><td><b>Check  Constraints</b></td></tr></table>' 
-		print '<table border="0" cellspacing="1" cellpadding="0" width="100%"><tr><th>#</th><th>Name</th><th>Column</th><th>Definition</th></tr>' 
+		print '<table border="0" cellspacing="0" cellpadding="5" width="100%"><tr><td><b>Check  Constraints</b></td></tr></table>' 
+		print '<table border="0" cellspacing="1" cellpadding="5" width="100%"><tr><th>#</th><th>Name</th><th>Column</th><th>Definition</th></tr>' 
 
 		While(@j <= @maxj)
 		begin
@@ -350,8 +345,8 @@ begin
 	if (@maxj >0)
 	begin
 
-		print '<table border="0" cellspacing="0" cellpadding="0" width="100%"><tr><td><b>Triggers</b></td></tr></table>' 
-		print '<table border="0" cellspacing="1" cellpadding="0" width="100%"><tr><th>#</th><th>Name</th><th>Description</th></tr>' 
+		print '<table border="0" cellspacing="0" cellpadding="5" width="100%"><tr><td><b>Triggers</b></td></tr></table>' 
+		print '<table border="0" cellspacing="1" cellpadding="5" width="100%"><tr><th>#</th><th>Name</th><th>Description</th></tr>' 
 
 		While(@j <= @maxj)
 		begin
@@ -395,8 +390,8 @@ begin
 	if (@maxj >0)
 	begin
 
-		print '<table border="0" cellspacing="0" cellpadding="0" width="100%"><tr><td><b>Indexes</b></td></tr></table>' 
-		print '<table border="0" cellspacing="1" cellpadding="0" width="100%"><tr><th>#</th><th>Name</th><th>Type</th><th>Columns</th></tr>' 
+		print '<table border="0" cellspacing="0" cellpadding="5" width="100%"><tr><td><b>Indexes</b></td></tr></table>' 
+		print '<table border="0" cellspacing="1" cellpadding="5" width="100%"><tr><th>#</th><th>Name</th><th>Type</th><th>Columns</th></tr>' 
 		set @Output = ''
 		set @last = ''
 		set @current = ''
