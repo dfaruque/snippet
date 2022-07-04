@@ -53,7 +53,7 @@ set nocount on
 		begin
 		insert into #Tables (Object_id, Name, Type, [description])
 			--FOR 2000
-			select object_id(table_name),  '[' + table_schema + '].[' + table_name + ']',  
+			select object_id(table_name), table_name,  
 			case when table_type = 'BASE TABLE'  then 'Table'   else 'View' end,
 			cast(p.value as varchar(4000))
 			from information_schema.tables t
@@ -64,7 +64,7 @@ set nocount on
 		begin
 		insert into #Tables (Object_id, Name, Type, [description])
 		--FOR 2005
-		Select o.object_id,  '[' + s.name + '].[' + o.name + ']', 
+		Select o.object_id, o.name, 
 				case when type = 'V' then 'View' when type = 'U' then 'Table' end,  
 				cast(p.value as varchar(4000))
 				from sys.objects o 
@@ -80,7 +80,7 @@ print '<table border="0" cellspacing="0" cellpadding="5" width="550px" align="ce
 print '<table border="0" cellspacing="1" cellpadding="5" width="550px" align="center"><tr><th>#</th><th>Object</th><th>Type</th></tr>' 
 While(@i <= @maxi)
 begin
-	select @Output =  '<tr><td align="center">' + Cast((@i) as varchar) + '</td><td><a href="#' + Type + ':' + name + '">' + name + '</a></td><td>' + Type + '</td></tr>' 
+	select @Output =  '<tr><td align="center">' + Cast((@i) as varchar) + '</td><td><a href="#' + Type + ': ' + name + '">' + name + '</a></td><td>' + Type + '</td></tr>' 
 			from #Tables where id = @i
 	
 	print @Output
@@ -92,13 +92,13 @@ set @i = 1
 While(@i <= @maxi)
 begin
 	--table header
-	select @Output =  '<tr><th align="left"><a name="' + Type + ':' + name + '"></a><b>' + Type + ':' + name + '</b></th></tr>',  @description = [description]
+	select @Output =  '<tr><th align="left"><a name="' + Type + ': ' + name + '"></a><b>' + Type + ': ' + name + '</b></th></tr>',  @description = [description]
 			from #Tables where id = @i
 	
-	print '<br /><br /><br /><table border="0" cellspacing="0" cellpadding="5" width="100%"><tr><td align="right"><a href="#index">Index</a></td></tr>'
+	print '<br /><br /><br /><table border="0" cellspacing="0" cellpadding="5" width="100%">'
 	print @Output
 	print '</table><br />'
-	print '<table border="0" cellspacing="0" cellpadding="5" width="100%"><tr><td><b>Description</b></td></tr><tr><td>' + isnull(@description, '') + '</td></tr></table><br />' 
+	--print '<table border="0" cellspacing="0" cellpadding="5" width="100%"><tr><td><b>Description</b></td></tr><tr><td>' + isnull(@description, '') + '</td></tr></table><br />' 
 
 	--table columns
 	truncate table #Columns 
